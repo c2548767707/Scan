@@ -13,6 +13,7 @@
 TCP_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #(1)
 TCP_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT) #(2)
 TCP_sock.settimeout(delay) #(3)
+
 2. 多线程扫描端口
 
 单线程扫描虽然逻辑简单，但无疑是及其低效的。因为在扫描过程中要进行大量的数据包的发送和接受，所以这是一个I/O密集型的操作。如果只是用单线程进行扫描的话，程序会在等待回复的过程中浪费大量的时间。因此多线程的操作是很有必要的。这里，一个很自然的思路就是为每一个端口单独开一个线程进行扫描。
